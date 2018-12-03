@@ -11,6 +11,7 @@ It throws an exception right when selecting the distro to be upgraded:
 Details: Storage::Exception
 Caller:/mounts/mp_0001/usr/share/YaST2/lib/y2storage/storage_class_wrapper.rb:260: in `find_by_any_name`
 ```
+[Bug Screenshot](bug_screenshot.png)
 
 ## Building the Fix
 
@@ -68,17 +69,19 @@ filesystem which supports symlinks like e.g. `ext3`. DUDs are `cpio.gz`
 archives. Let us assume I have a USB stick with only one ext3 partition
 mounted to `/mnt`.
 
-Then I use the following commands:
+Then I use the following commands as root:
 ```
 cp y2lp15.dud /mnt; cd /mnt
 zcat y2lp15.dud | cpio -idmv
-cd ~; sudo umount /mnt
+cd ~; umount /mnt
 ```
 
 A directory `linux` should appear. `linuxrc` is looking for that directory on
 all partitions and picks up the DUD automatically this way. The option `dud=1`
 can make this more visible. But it is rather meant for the case of only one
 DVD drive providing both, the regular media and the DUD.
+
+**Tested** in affected QEMU/KVM VM with emulated SATA disk + LUKS. Works.
 
 ## Building a new Installation ISO with DUD
 
@@ -91,6 +94,8 @@ Example build command:
 sudo mksusecd --create openSUSE-Leap-15.0-DVD-x86_64-boo1094963.iso \
 --initrd y2lp15.dud -- ./openSUSE-Leap-15.0-DVD-x86_64.iso
 ```
+
+**Tested** in affected QEMU/KVM VM with emulated SATA disk + LUKS. Works.
 
 ## Getting mkdud and mksusecd
 
