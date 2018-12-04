@@ -2,8 +2,9 @@
 
 ## Problem Description
 
-If you want to upgrade from Leap 42.3 to Leap 15 with encrypted partitions,
-then you run into the following bug:<br/>
+If you boot the Leap 15 installation media and want to upgrade from Leap 42.3
+to Leap 15 with encrypted partitions, then you likely run into the following
+bug:<br/>
 https://bugzilla.suse.com/show_bug.cgi?id=1094963
 
 It throws an exception right when selecting the distro to be upgraded:
@@ -13,11 +14,19 @@ Caller:/mounts/mp_0001/usr/share/YaST2/lib/y2storage/storage_class_wrapper.rb:26
 ```
 [Bug Screenshot](bug_screenshot.png)
 
+YaST cannot associate the `/dev/mapper/cr_*` paths from `/etc/fstab` to
+automatically detected volumes.
+
+## Workaround in Release Notes
+
+There is a preferred workaround in the release notes:<br/>
+https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/15.0/#sec.upgrade.encrypted-disk
+
 ## Building the Fix
 
-Only updated YaST2 and `libstorage-ng` files fix this. So I have prepared a
-**Driver Update Disk (DUD)** `y2lp15.dud` here with files which were latest on
-**2018-11-29**.
+Only updated YaST2 and `libstorage-ng` files can actually fix the bug. So I have
+prepared a **Driver Update Disk (DUD)** `y2lp15.dud` here with files which were
+latest on **2018-11-29**.
 
 **File source**: http://download.opensuse.org/update/leap/15.0/oss/x86_64/
 
