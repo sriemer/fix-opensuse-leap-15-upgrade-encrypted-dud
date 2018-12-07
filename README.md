@@ -71,7 +71,7 @@ add the `startshell=1` boot option to get more control.
 
 I have **tested** this method. Using this DUD fixes this bug for me.
 
-## Applying the DUD from USB
+## Applying the DUD from USB automatically
 
 Besides network install, it is also possible to extract DUDs to the root of a
 filesystem which supports symlinks like e.g. `ext3`. DUDs are `cpio.gz`
@@ -86,9 +86,8 @@ cd ~; umount /mnt
 ```
 
 A directory `linux` should appear. `linuxrc` is looking for that directory on
-all partitions and picks up the DUD automatically this way. The option `dud=1`
-can make this more visible. But it is rather meant for the case of only one
-DVD drive providing both, the regular media and the DUD.
+all USB partitions and picks up the DUD automatically this way. The option
+`dud=1` can make this more visible.
 
 **Tested** in affected QEMU/KVM VM with emulated SATA disk + LUKS. Works.
 
@@ -113,3 +112,19 @@ sudo mksusecd --create openSUSE-Leap-15.0-DVD-x86_64-boo1094963.iso \
 
 Just clone those repositories and use `sudo make install` to install the tools.
 For `mksusecd` install the packages `squashfs` and `createrepo` as well.
+
+## Applying the DUD from CD/DVD-ROM manually
+
+For the unlikely case that a CD/DVD-ROM drive is available which is not blocked
+by the regular installation media, then it is possible to burn the `y2lp15.dud`
+(e.g. with `Brasero`) to a CD-R or into a `.iso` image.
+
+The upgrade boot option `dud=disk:/y2lp15.dud` triggers that `linuxrc` is
+looking for the DUD on all CD/DVD-ROM drives and USB partitions.
+
+**Note:** Automatic applying is reserved to kernel module DUDs provided by
+SUSE partners only. So often it is better to directly create a new installation
+ISO together with the DUD with the help of `mksusecd`.
+
+Tested in affected QEMU/KVM VM with emulated SATA disk + LUKS and second
+CD-ROM drive. Works.
