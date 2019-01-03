@@ -89,7 +89,8 @@ A directory `linux` should appear. `linuxrc` is looking for that directory on
 all USB partitions and picks up the DUD automatically this way. The option
 `dud=1` can make this more visible.
 
-**Tested** in affected QEMU/KVM VM with emulated SATA disk + LUKS. Works.
+**Tested** in affected QEMU/KVM VM with emulated SATA disk + LUKS and extracted
+DUD on USB stick. Works.
 
 ## Building a new Installation ISO with DUD
 
@@ -113,7 +114,7 @@ sudo mksusecd --create openSUSE-Leap-15.0-DVD-x86_64-boo1094963.iso \
 Just clone those repositories and use `sudo make install` to install the tools.
 For `mksusecd` install the packages `squashfs` and `createrepo` as well.
 
-## Applying the DUD from CD/DVD-ROM manually
+## Applying the DUD from CD/DVD-ROM (or USB) manually
 
 For the unlikely case that a CD/DVD-ROM drive is available which is not blocked
 by the regular installation media, then it is possible to burn the `y2lp15.dud`
@@ -127,4 +128,4 @@ SUSE partners only. So often it is better to directly create a new installation
 ISO together with the DUD with the help of `mksusecd`.
 
 Tested in affected QEMU/KVM VM with emulated SATA disk + LUKS and second
-CD-ROM drive. Works.
+CD-ROM drive. Also tested with compressed DUD on USB stick instead. Works.
